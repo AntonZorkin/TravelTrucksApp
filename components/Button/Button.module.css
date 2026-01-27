@@ -1,0 +1,18 @@
+.button {
+  width: 166px;
+  height: 56px;
+  border-radius: 200px;
+  padding: 16px 0;
+  background-color: #e44848;
+  color: #fff;
+  text-align: center;
+}
+
+.hero {
+  width: 173px;
+}
+
+.button:hover,
+.button:active {
+  background-color: #d84343;
+}
