@@ -4,7 +4,6 @@ interface Review {
   comment: string;
 }
 
-
 export interface CamperListItem {
   id: string;
   name: string;
@@ -27,14 +26,21 @@ export interface CamperListItem {
     thumb: string;
     original: string;
   }[];
+  reviews: Review[];
 }
 
 export interface Camper extends CamperListItem {
-  form: "fullyIntegrated" | "alcove" |"panelTruck";
+  form: "fullyIntegrated" | "alcove" | "panelTruck";
   length: string;
   width: string;
   height: string;
   tank: string;
   consumption: string;
-  reviews: Review[];
+  
+}
+
+export interface FilterProps {
+  location: string;
+  equipment: string[];
+  type: string | null;
 }

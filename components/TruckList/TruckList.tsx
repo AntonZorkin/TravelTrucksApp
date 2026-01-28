@@ -1,4 +1,4 @@
-import { Camper } from "@/types/trucks";
+import {  CamperListItem } from "@/types/trucks";
 import styles from "./TruckList.module.css";
 import Image from "next/image";
 import Icon from "../Icon/Icon";
@@ -6,13 +6,13 @@ import Link from "next/link";
 import Button from "../Button/Button";
 
 interface TruckListProps {
-  trucks: Camper[];
+  trucks: CamperListItem[];
 }
 
 const TruckList = ({ trucks }: TruckListProps) => {
   return (
     <ul className={styles.container}>
-      {trucks.map((truck: Camper) => {
+      {trucks.map((truck: CamperListItem) => {
         const features = [
           truck.transmission && { label: truck.transmission, icon: "diagram" },
           truck.engine && { label: truck.engine, icon: "fuel-pump" },

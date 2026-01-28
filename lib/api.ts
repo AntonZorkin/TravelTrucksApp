@@ -10,27 +10,15 @@ interface FetchCampersParams {
   page: number;
   limit: number;
   search?: string;
-  form?: "fullyIntegrated" | "alcove" |"panelTruck";
+  form?: string;
+  [key: string]: string | number | boolean | undefined;
 }
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
-export const fetchCampers = async ({
-  page,
-  limit,
-  search,
-  form,
-}: FetchCampersParams): Promise<CampersHttpResponse> => {
-  const params: FetchCampersParams = {
-    page,
-    limit,
-    search,
-    form,
-  };
-  if (form) {
-    params.form = form;
-  }
-
+export const fetchCampers = async (
+  params: FetchCampersParams,
+): Promise<CampersHttpResponse> => {
   const response = await axios.get<CampersHttpResponse>(`${baseURL}/campers`, {
     params,
   });
