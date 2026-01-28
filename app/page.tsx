@@ -1,5 +1,6 @@
 import Button from "@/components/Button/Button";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -11,7 +12,10 @@ export default function Home() {
             <p className={styles.text}>
               You can find everything you want in our catalog
             </p>
-            <Button>View Now</Button>            
+            <Link href={"/catalog"}>
+              <Button>View Now</Button>    
+            </Link>
+                    
           </div>
         </section>
       </main>
