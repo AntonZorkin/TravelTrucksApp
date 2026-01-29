@@ -8,9 +8,10 @@ import { FilterProps } from "@/types/trucks";
 
 interface SidebarProps {
   onSubmit: (filters: FilterProps) => void;
+  loading: boolean;
 }
 
-export default function Sidebar({ onSubmit }: SidebarProps) {
+export default function Sidebar({ onSubmit, loading }: SidebarProps) {
   const [activeEquip, setActiveEquip] = useState<string[]>([]);
   const toggleEquip = (name: string) => {
     setActiveEquip((prev) =>
@@ -138,7 +139,7 @@ export default function Sidebar({ onSubmit }: SidebarProps) {
           </div>
         </div>
 
-        <Button>Search</Button>
+        <Button disabled={ loading}>{loading?"Loadibg...":"Search"}</Button>
       </form>
 
     </section>

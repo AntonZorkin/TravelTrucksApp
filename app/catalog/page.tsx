@@ -61,7 +61,7 @@ export default function Catalog() {
         setTrucks(response.items);
         setTotal(response.total);
       } catch (err) {
-        console.error("FETCH ERROR:", err);
+
       } finally {
         setLoading(false);
       }
@@ -87,7 +87,7 @@ export default function Catalog() {
       setPage(nextPage);
       setTotal(response.total);
     } catch (err) {
-      console.error("LOAD MORE ERROR:", err);
+
     } finally {
       setLoading(false);
     }
@@ -100,9 +100,10 @@ export default function Catalog() {
       <h1 className={styles.disable}>Truck Catalog</h1>
 
       <aside>
-        <Sidebar onSubmit={onFiltersSubmit} />
+        <Sidebar onSubmit={onFiltersSubmit} loading={loading}/>
       </aside>
       <div>
+        {!loading && trucks.length === 0 && "No results found"}
         <TruckList
           trucks={trucks}
           onLoadMore={handleLoadMore}
