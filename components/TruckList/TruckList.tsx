@@ -12,6 +12,19 @@ interface TruckListProps {
   loading: boolean;
 }
 
+const LABELS: Record<string, string> = {
+  automatic: "Automatic",
+  diesel: "Diesel",
+  petrol: "Petrol",
+  kitchen: "Kitchen",
+  bathroom: "Bathroom",
+  radio: "Radio",
+  microwave: "Microwave",
+  refrigerator: "Refrigerator",
+  AC: "AC",
+  TV: "TV",
+};
+
 const TruckList = ({
   trucks,
   onLoadMore,
@@ -83,8 +96,8 @@ const TruckList = ({
                 <div className={styles.details}>
                   {features.map((feature, index) => (
                     <div key={index} className={styles.comfort}>
-                      <Icon name={feature.icon} size={20} />
-                      <p>{feature.label}</p>
+                      <div><Icon name={feature.icon} size={20} /></div>  
+                      <p>{LABELS[feature.label] ?? feature.label}</p>                      
                     </div>
                   ))}
                 </div>

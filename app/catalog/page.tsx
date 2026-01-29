@@ -102,7 +102,6 @@ export default function Catalog() {
       <aside>
         <Sidebar onSubmit={onFiltersSubmit} />
       </aside>
-
       <div>
         <TruckList
           trucks={trucks}
