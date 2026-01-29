@@ -1,3 +1,77 @@
 .active {
   background-color: #ffc531;
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 360px;
+}
+
+.locationText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-gray);
+  margin-bottom: 8px;
+}
+
+.input {
+  border-radius: 12px;
+  padding: 18px 218px 18px 20px;
+  width: 360px;
+  height: 56px;
+  background-color: #f7f7f7;
+  display: flex;
+  gap: 8px;
+}
+
+.inputField {
+  outline: none;
+  border: none;
+  background-color: inherit;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-main); /*!!!!!!!!!!!!!!!!!!!!!*/
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.filtersText {
+  color: var(--color-text);
+}
+
+.vehicleText {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.line {
+  color: var(--color-gray-light); /*?????????????????????*/
+  margin-bottom: 24px;
+}
+
+.equipList,
+.typeList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 8px;
+}
+
+.equipItem,
+.typeItem {
+  border: 1px solid var(--color-gray-light);
+  border-radius: 12px;
+  padding: 16px 18px;
+  width: 112px;
+  height: 96px;
+  background-color: #fff;
+}

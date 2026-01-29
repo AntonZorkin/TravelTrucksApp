@@ -39,12 +39,13 @@ export default function Sidebar({ onSubmit }: SidebarProps) {
 
   return (
     <section>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.location}>
           <p className={styles.locationText}>Location</p>
           <div className={styles.input}>
-            <Icon name="map" size={20} />
-            <input
+            <div><Icon name="map" size={20} /></div>
+            
+            <input className={styles.inputField}
               type="text"
               placeholder="Location"
               value={location}
@@ -56,6 +57,7 @@ export default function Sidebar({ onSubmit }: SidebarProps) {
           <p className={styles.filtersText}>Filters</p>
           <div className={styles.vehicleEquip}>
             <h2 className={styles.vehicleText}>Vehicle equipment</h2>
+            <hr  className={styles.line}/>
             <div className={styles.equipList}>
               <button
                 type="button"
@@ -102,11 +104,12 @@ export default function Sidebar({ onSubmit }: SidebarProps) {
 
           <div className={styles.vehicleType}>
             <h2 className={styles.vehicleText}>Vehicle type</h2>
+            <hr  className={styles.line}/>
             <div className={styles.typeList}>
               <button
                 type="button"
-                className={`${styles.typeItem} ${vehicleType === "van" ? styles.active : ""}`}
-                onClick={() => selectVehicleType("van")}
+                className={`${styles.typeItem} ${vehicleType === "panelTruck" ? styles.active : ""}`}
+                onClick={() => selectVehicleType("panelTruck")}
               >
                 <Icon name="three-windows" size={32} />
                 <p className={styles.equipText}>Van</p>
@@ -114,9 +117,9 @@ export default function Sidebar({ onSubmit }: SidebarProps) {
               <button
                 type="button"
                 className={`${styles.typeItem} ${
-                  vehicleType === "fully" ? styles.active : ""
+                  vehicleType === "fullyIntegrated" ? styles.active : ""
                 }`}
-                onClick={() => selectVehicleType("fully")}
+                onClick={() => selectVehicleType("fullyIntegrated")}
               >
                 <Icon name="four-windows" size={32} />
                 <p className={styles.equipText}>Fully Integrated</p>
