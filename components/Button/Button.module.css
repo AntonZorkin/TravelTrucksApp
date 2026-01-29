@@ -6,6 +6,8 @@
   background-color: #e44848;
   color: #fff;
   text-align: center;
+  border: none;
+  outline: none;
 }
 
 .hero {

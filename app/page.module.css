@@ -13,10 +13,6 @@
   align-items: center;
 }
 
-/* .hero {
-
-} */
-
 .title {
   font-weight: 600;
   font-size: 48px;
@@ -29,4 +25,24 @@
   font-size: 24px;
   line-height: 1.33;
   margin-bottom: 40px;
+}
+
+.errorWrapper {
+  display: flex;
+  margin: 40 auto;
+  gap: 24px;
+}
+
+.errorTitle {
+  font-size: 24px;
+}
+
+.errorBtn {
+  width: 166px;
+  height: 56px;
+  border-radius: 200px;
+  padding: 16px auto;
+  background-color: #e44848;
+  color: #fff;
+  text-align: center;
 }

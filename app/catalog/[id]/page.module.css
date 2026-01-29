@@ -1,0 +1,151 @@
+.container {
+  width: 1440px;
+  padding: 48px 64px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.general {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33;
+  margin-bottom: 8px;
+}
+
+.ratingLocation {
+  display: flex;
+  gap: 16px;
+}
+
+.rating,
+.location {
+  display: flex;
+  gap: 4px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.imageWrapper {
+  display: flex;
+  gap: 48px;
+}
+
+.image {
+  width: 292px;
+  height: 312px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.image img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-gray);
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+.tabsTitles {
+  display: flex;
+  gap: 40px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.features {
+  display: flex;
+  gap: 40px;
+}
+
+.tabsHead {
+  margin-bottom: 44px;
+}
+
+.detailsLineWrapper {
+  margin-bottom: 24px;
+}
+
+.line {
+  border: none;
+  border-top: 1px solid var(--color-gray-light);
+}
+
+.truckDetails,
+.formWrapper {
+  width: 631px;
+  height: 588px;
+  padding: 44px 52px;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.formWrapper {
+  background-color: inherit;
+  border: 1px solid var(--color-gray-light);
+  justify-content: start;
+}
+
+.detailsTitle {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.featuresWrapper {
+  flex-shrink: 0;
+}
+
+.detItem {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  display: flex;
+  justify-content: space-between;
+}
+
+.detailsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

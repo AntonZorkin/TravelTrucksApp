@@ -139,7 +139,7 @@ export default function Sidebar({ onSubmit, loading }: SidebarProps) {
           </div>
         </div>
 
-        <Button disabled={ loading}>{loading?"Loadibg...":"Search"}</Button>
+        <Button disabled={ loading}>{loading?"Loading...":"Search"}</Button>
       </form>
 
     </section>

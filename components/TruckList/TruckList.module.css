@@ -84,25 +84,6 @@
   text-overflow: ellipsis;
 }
 
-.details {
-  display: flex;
-  height: 104px;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.comfort {
-  border-radius: 100px;
-  padding: 12px 18px;
-  background-color: #f2f4f7;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  text-align: center;
-  display: flex;
-  gap: 8px;
-}
-
 .loadMoreBtn {
   border: 1px solid var(--color-gray-light);
   width: 145px;
