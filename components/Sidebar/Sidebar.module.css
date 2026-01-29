@@ -1,5 +1,6 @@
-.active {
-  background-color: #ffc531;
+.equipItem.active,
+.typeItem.active {
+  border: 1px solid #e44848;
 }
 
 .form {
@@ -19,7 +20,7 @@
 
 .input {
   border-radius: 12px;
-  padding: 18px 218px 18px 20px;
+  padding: 18px 20px;
   width: 360px;
   height: 56px;
   background-color: #f7f7f7;
@@ -34,7 +35,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
-  color: var(--color-main); /*!!!!!!!!!!!!!!!!!!!!!*/
+  color: var(--color-main);
 }
 
 .filters {
@@ -55,7 +56,8 @@
 }
 
 .line {
-  color: var(--color-gray-light); /*?????????????????????*/
+  border: none;
+  border-top: 1px solid var(--color-gray-light);
   margin-bottom: 24px;
 }
 
@@ -74,4 +76,5 @@
   width: 112px;
   height: 96px;
   background-color: #fff;
+  mix-blend-mode: multiply;
 }

@@ -19,8 +19,7 @@ const baseURL = process.env.NEXT_PUBLIC_API_URL;
 export const fetchCampers = async (
   params: FetchCampersParams,
 ): Promise<CampersHttpResponse> => {
-  console.log("API baseURL:", baseURL);
-console.log("API campers params:", params);
+
   const response = await axios.get<CampersHttpResponse>(`${baseURL}/campers`, {
     params,
   });

@@ -5,14 +5,9 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import TruckList from "@/components/TruckList/TruckList";
 import { fetchCampers } from "@/lib/api";
 import { CamperListItem, FilterProps } from "@/types/trucks";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-const equipmentMap: Record<string, string> = {
-  AC: "AC",
-  TV: "TV",
-  Kitchen: "kitchen",
-  Bathroom: "bathroom",
-};
+const LIMIT = 4;
 
 export default function Catalog() {
   const [filters, setFilters] = useState<FilterProps>({
@@ -21,51 +16,100 @@ export default function Catalog() {
     type: null,
   });
 
+  const [trucks, setTrucks] = useState<CamperListItem[]>([]);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState<number | null>(null);
+  const [loading, setLoading] = useState(false);
+
   const onFiltersSubmit = (newFilters: FilterProps) => {
     setFilters(newFilters);
   };
 
-  const [trucks, setTrucks] = useState<CamperListItem[]>([]);
-  useEffect(() => {
-    const loadTrucks = async () => {
+  const buildParams = useCallback(
+    (pageNum: number) => {
       const equipParams = Object.fromEntries(
         filters.equipment
           .filter((name) => name !== "Automatic")
-          .map((name) => equipmentMap[name])
-          .filter(Boolean)
-          .map((apiKey) => [apiKey, true]),
+          .map((name) => [name, true]),
       );
 
       const transmissionParam = filters.equipment.includes("Automatic")
         ? { transmission: "automatic" }
         : {};
-      const params = {
-        page: 1,
-        limit: 4,
+
+      return {
+        page: pageNum,
+        limit: LIMIT,
         location: filters.location || undefined,
         form: filters.type || undefined,
         ...equipParams,
         ...transmissionParam,
       };
-      console.log("REQUEST PARAMS:", params);
+    },
+    [filters],
+  );
+
+  useEffect(() => {
+    const loadFirstPage = async () => {
+      setLoading(true);
       try {
-        const response = await fetchCampers(params);
+        setTrucks([]);
+        setPage(1);
+        setTotal(null);
+
+        const response = await fetchCampers(buildParams(1));
         setTrucks(response.items);
+        setTotal(response.total);
       } catch (err) {
         console.error("FETCH ERROR:", err);
+      } finally {
+        setLoading(false);
       }
-
-
     };
 
-    loadTrucks();
-  }, [filters]);
+    loadFirstPage();
+  }, [buildParams]);
+
+  const handleLoadMore = async () => {
+    if (loading) return;
+
+    const nextPage = page + 1;
+    setLoading(true);
+
+    try {
+      const response = await fetchCampers(buildParams(nextPage));
+
+      setTrucks((prev) => {
+        const existing = new Set(prev.map((t) => t.id));
+        return [...prev, ...response.items.filter((t) => !existing.has(t.id))];
+      });
+
+      setPage(nextPage);
+      setTotal(response.total);
+    } catch (err) {
+      console.error("LOAD MORE ERROR:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const hasMore = total === null ? true : trucks.length < total;
+
   return (
     <section className={styles.container}>
       <h1 className={styles.disable}>Truck Catalog</h1>
-      <aside>{<Sidebar onSubmit={onFiltersSubmit} />}</aside>
+
+      <aside>
+        <Sidebar onSubmit={onFiltersSubmit} />
+      </aside>
+
       <div>
-        <TruckList trucks={trucks} />
+        <TruckList
+          trucks={trucks}
+          onLoadMore={handleLoadMore}
+          showLoadMore={hasMore}
+          loading={loading}
+        />
       </div>
     </section>
   );

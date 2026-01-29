@@ -77,8 +77,8 @@ export default function Sidebar({ onSubmit }: SidebarProps) {
               </button>
               <button
                 type="button"
-                className={`${styles.equipItem} ${activeEquip.includes("Kitchen") ? styles.active : ""}`}
-                onClick={() => toggleEquip("Kitchen")}
+                className={`${styles.equipItem} ${activeEquip.includes("kitchen") ? styles.active : ""}`}
+                onClick={() => toggleEquip("kitchen")}
               >
                 <Icon name="cup-hot" size={32} />
                 <p className={styles.equipText}>Kitchen</p>
@@ -93,8 +93,8 @@ export default function Sidebar({ onSubmit }: SidebarProps) {
               </button>
               <button
                 type="button"
-                className={`${styles.equipItem} ${activeEquip.includes("Bathroom") ? styles.active : ""}`}
-                onClick={() => toggleEquip("Bathroom")}
+                className={`${styles.equipItem} ${activeEquip.includes("bathroom") ? styles.active : ""}`}
+                onClick={() => toggleEquip("bathroom")}
               >
                 <Icon name="shower" size={32} />
                 <p className={styles.equipText}>Bathroom</p>
@@ -140,6 +140,7 @@ export default function Sidebar({ onSubmit }: SidebarProps) {
 
         <Button>Search</Button>
       </form>
+
     </section>
   );
 }
