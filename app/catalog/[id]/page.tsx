@@ -24,15 +24,7 @@ export default function TruckDetails() {
   const [comment, setComment] = useState("");
 
   const [activeTab, setActiveTab] = useState<"Features"|"Reviews">("Features")
-  const handleClick = () => {
-    if (activeTab==="Features") {
-      setActiveTab("Reviews")
-    }    
-    else {
-      setActiveTab("Features")
-    }
-  }
-
+  
   const { id } = useParams<{ id: string }>();
   useEffect(() => {
     if (!id) {
@@ -84,7 +76,7 @@ export default function TruckDetails() {
           <div className={styles.ratingLocation}>
             <div className={styles.rating}>
               <Icon name="rating" size={16} />
-              <p>
+              <p className={styles.ratingText}>
                 {truck?.rating}({truck?.reviews ? truck.reviews.length : 0}{" "}
                 Reviews)
               </p>
@@ -112,8 +104,8 @@ export default function TruckDetails() {
       <div className={styles.tabs}>
         <div className={styles.tabsHead}>
           <div className={styles.tabsTitlesWrapper}>
-            <button className={styles.tabsTitles} onClick={() => setActiveTab("Features")}>Features</button>
-            <button className={styles.tabsTitles} onClick={() => setActiveTab("Reviews")}>Reviews</button>
+            <button className={`${styles.tabsTitles} ${activeTab==="Features"?styles.activeTab:""}`} onClick={() => setActiveTab("Features")}>Features</button>
+            <button className={`${styles.tabsTitles} ${activeTab==="Reviews"?styles.activeTab:""}`} onClick={() => setActiveTab("Reviews")}>Reviews</button>
           </div>
 
           <hr className={styles.line} />

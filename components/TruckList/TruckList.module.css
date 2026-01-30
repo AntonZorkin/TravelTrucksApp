@@ -59,6 +59,26 @@
   align-items: center;
 }
 
+.btnHeart {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  color: #101828;
+}
+
+/* .btnHeart svg {
+  color: #101828;
+} */
+
+.btnHeartActive {
+  color: #e44848;
+}
+
+/* .favorites {
+  color: #e44848;
+} */
+
 .ratingLocation {
   display: flex;
   gap: 16px;
@@ -72,6 +92,13 @@
   font-size: 16px;
   line-height: 1.5;
   align-items: center;
+}
+
+.rating {
+  color: #ffc531;
+}
+.ratingText {
+  color: var(--color-main);
 }
 
 .description {

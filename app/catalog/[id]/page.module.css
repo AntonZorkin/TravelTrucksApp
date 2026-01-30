@@ -40,6 +40,13 @@
   margin-bottom: 16px;
 }
 
+.rating {
+  color: #ffc531;
+}
+.ratingText {
+  color: var(--color-main);
+}
+
 .price {
   font-weight: 600;
   font-size: 24px;
@@ -96,6 +103,12 @@
   margin-bottom: 24px;
   background-color: inherit;
   border: none;
+  height: 48px;
+  border-bottom: 5px solid #fff;
+}
+
+.activeTab {
+  border-bottom: 5px solid #e44848;
 }
 
 .features {
@@ -106,10 +119,6 @@
 .tabsHead {
   margin-bottom: 56px;
 }
-
-/* .detailsLineWrapper {
-  margin-bottom: 24px;
-} */
 
 .line {
   border: none;
