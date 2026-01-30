@@ -97,8 +97,7 @@
 
 .loadMoreBtn:hover,
 .loadMoreBtn:active {
-  background-color: #d84343;
-  color: #fff;
+  border: 1px solid #d84343;
 }
 
 .loadMoreWrapper {

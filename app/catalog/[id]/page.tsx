@@ -9,15 +9,29 @@ import Icon from "@/components/Icon/Icon";
 import Image from "next/image";
 import Button from "@/components/Button/Button";
 import FeaturesList from "@/components/FeaturesList/FeaturesList";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { uk } from "date-fns/locale";
+import { handleClientScriptLoad } from "next/script";
 
 export default function TruckDetails() {
   const [truck, setTruck] = useState<Camper | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const [name, setName] = useState<string>();
-  const [email, setEmail] = useState<string>();
-  const [date, setDate] = useState<string>();
-  const [comment, setComment] = useState<string>();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [date, setDate] = useState<Date | null>();
+  const [comment, setComment] = useState("");
+
+  const [activeTab, setActiveTab] = useState<"Features"|"Reviews">("Features")
+  const handleClick = () => {
+    if (activeTab==="Features") {
+      setActiveTab("Reviews")
+    }    
+    else {
+      setActiveTab("Features")
+    }
+  }
 
   const { id } = useParams<{ id: string }>();
   useEffect(() => {
@@ -42,8 +56,24 @@ export default function TruckDetails() {
     alert("Booking successful");
     setName("");
     setEmail("");
-    setDate("");
+    setDate(null);
     setComment("");
+  };
+
+  const renderStars = (rating: number | string) => {
+    const value = Math.floor(Number(rating));
+    return (
+      <div className={styles.stars}>
+        {Array.from({ length: 5 }, (_, i) => (
+          <Icon
+            key={i}
+            name="rating"
+            size={16}
+            className={i < value ? styles.starActive : styles.starInactive}
+          />
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -81,58 +111,83 @@ export default function TruckDetails() {
       </div>
       <div className={styles.tabs}>
         <div className={styles.tabsHead}>
-          <div className={styles.tabsTitles}>
-            <h3>Features</h3>
-            <h3>Reviews</h3>
+          <div className={styles.tabsTitlesWrapper}>
+            <button className={styles.tabsTitles} onClick={() => setActiveTab("Features")}>Features</button>
+            <button className={styles.tabsTitles} onClick={() => setActiveTab("Reviews")}>Reviews</button>
           </div>
 
           <hr className={styles.line} />
         </div>
-
         <div className={styles.features}>
-          <div className={styles.truckDetails}>
+
+          {activeTab==="Features"&&<div className={styles.truckDetails}>
             <div className={styles.featuresWrapper}>
-              {truck && <FeaturesList truck={truck} limit={7} />}
+              {truck && <FeaturesList truck={truck} limit={11} />}
             </div>
             <div className={styles.details}>
               <h4 className={styles.detailsTitle}>Vehicle details</h4>
               <div className={styles.detailsLineWrapper}>
                 <hr className={styles.line} />
               </div>
-              <div className={styles.detailsWrapper}>
-                <div className={styles.detItem}>
+              <ul className={styles.detailsWrapper}>
+                <li className={styles.detItem}>
                   <p>Form</p>
                   <p>{truck?.form}</p>
-                </div>
-                <div className={styles.detItem}>
+                </li>
+                <li className={styles.detItem}>
                   <p>Length</p>
                   <p>{truck?.length}</p>
-                </div>
-                <div className={styles.detItem}>
+                </li>
+                <li className={styles.detItem}>
                   <p>Width</p>
                   <p>{truck?.width}</p>
-                </div>
-                <div className={styles.detItem}>
+                </li>
+                <li className={styles.detItem}>
                   <p>Height</p>
                   <p>{truck?.height}</p>
-                </div>
-                <div className={styles.detItem}>
+                </li>
+                <li className={styles.detItem}>
                   <p>Tank</p>
                   <p>{truck?.tank}</p>
-                </div>
-                <div className={styles.detItem}>
+                </li>
+                <li className={styles.detItem}>
                   <p>Consumption</p>
                   <p>{truck?.consumption}</p>
+                </li>
+              </ul>
+            </div>
+          </div>}
+          {activeTab==="Reviews"&&<div className={styles.reviews}>
+          <div>
+            <div className={styles.commentWrapper}>
+              {truck?.reviews.map((comment, index) => (
+                <div className={styles.commentItem} key={index}>
+                  <div className={styles.commentHead}>
+                    <div className={styles.commentTitle}>
+                      {comment.reviewer_name[0]}
+                    </div>
+                    <div className={styles.commentName}>
+                      <div>{comment.reviewer_name}</div>
+                      <div className={styles.stars}>
+                        {renderStars(comment.reviewer_rating)}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className={styles.comment}>{comment.comment}</div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
+        </div>}
           <div className={styles.formWrapper}>
             <div className={styles.formHead}>
-              <h4>Book your campervan now</h4>
-              <p>Stay connected! We are always ready to help you.</p>
+              <h4 className={styles.bookTitle}>Book your campervan now</h4>
+              <p className={styles.bookText}>
+                Stay connected! We are always ready to help you.
+              </p>
             </div>
-            <form onSubmit={handleSubmit}  className={styles.form}>
+            <form onSubmit={handleSubmit} className={styles.form}>
               <input
                 className={styles.inputField}
                 type="text"
@@ -147,16 +202,16 @@ export default function TruckDetails() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <input
+              <DatePicker
+                selected={date}
+                onChange={(d: Date | null) => setDate(d)}
+                locale={uk}
+                dateFormat="dd.MM.yyyy"
+                placeholderText="Booking date*"
                 className={styles.inputField}
-                type="date"
-                placeholder="Booking date*"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
               />
-              <input
-                className={styles.inputField}
-                type="text"
+              <textarea
+                className={`${styles.inputField} ${styles.textarea}`}
                 placeholder="Comment"
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
@@ -167,20 +222,7 @@ export default function TruckDetails() {
             </form>
           </div>
         </div>
-        <div className={styles.reviews}>
-          <div>
-            <div>
-              {truck?.reviews.map((comment, index) => (
-                <div className={styles.commentTitle} key={index}>
-                  <div>{comment.reviewer_name[0]}</div>
-                  <div>{comment.reviewer_name}</div>
-                  <div>{comment.reviewer_rating}</div>
-                  <div>{comment.comment}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        
       </div>
     </section>
   );

@@ -48,7 +48,7 @@ export default function Sidebar({ onSubmit, loading }: SidebarProps) {
             
             <input className={styles.inputField}
               type="text"
-              placeholder="Location"
+              placeholder="City"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />

@@ -67,10 +67,15 @@
   object-position: center;
 }
 
-.description {
+.description,
+.bookText {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
+  color: var(--color-text);
+}
+
+.bookText {
   color: var(--color-gray);
 }
 
@@ -78,13 +83,19 @@
   display: flex;
   flex-direction: column;
 }
-.tabsTitles {
+
+.tabsTitlesWrapper {
   display: flex;
   gap: 40px;
+}
+
+.tabsTitles {
   font-weight: 600;
   font-size: 20px;
   line-height: 1.2;
   margin-bottom: 24px;
+  background-color: inherit;
+  border: none;
 }
 
 .features {
@@ -93,12 +104,12 @@
 }
 
 .tabsHead {
-  margin-bottom: 44px;
+  margin-bottom: 56px;
 }
 
-.detailsLineWrapper {
+/* .detailsLineWrapper {
   margin-bottom: 24px;
-}
+} */
 
 .line {
   border: none;
@@ -123,13 +134,18 @@
   justify-content: start;
 }
 
-.detailsTitle {
+.detailsTitle,
+.bookTitle {
   font-weight: 600;
   font-size: 20px;
   line-height: 1.2;
   margin-bottom: 24px;
   display: flex;
   flex-direction: column;
+}
+
+.bookTitle {
+  margin-bottom: 8px;
 }
 
 .featuresWrapper {
@@ -148,4 +164,90 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.formHead {
+  margin-bottom: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.inputField {
+  background-color: #f7f7f7;
+  border: none;
+  border-radius: 12px;
+  padding: 18px 337px 18px 18px;
+  width: 527px;
+  height: 60px;
+}
+
+.form button {
+  margin-top: 24px;
+}
+
+.textarea {
+  height: 118px;
+  resize: none;
+}
+
+.commentWrapper {
+  width: 631px;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  padding: 16px 0;
+}
+
+.commentHead {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.commentTitle {
+  color: #e44848;
+  border-radius: 60px;
+  width: 60px;
+  height: 60px;
+  background-color: #f2f4f7;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33;
+  text-align: center;
+  padding: 15px 0;
+}
+
+.commentName {
+  width: 96px;
+  height: 44px;
+}
+
+.commentItem {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.comment {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.starActive {
+  color: #ffc531;
+}
+
+.starInactive {
+  color: #f2f4f7;
 }
