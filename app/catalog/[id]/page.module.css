@@ -1,6 +1,7 @@
 .container {
-  width: 1440px;
+  max-width: 1440px;
   padding: 48px 64px 80px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 60px;
@@ -101,7 +102,7 @@
   font-size: 20px;
   line-height: 1.2;
   margin-bottom: 24px;
-  background-color: inherit;
+  background-color: transparent;
   border: none;
   height: 48px;
   border-bottom: 5px solid #fff;
@@ -189,9 +190,10 @@
   background-color: #f7f7f7;
   border: none;
   border-radius: 12px;
-  padding: 18px 337px 18px 18px;
+  padding: 18px;
   width: 527px;
   height: 60px;
+  box-sizing: border-box;
 }
 
 .form button {
@@ -233,6 +235,9 @@
 .commentName {
   width: 96px;
   height: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .commentItem {
