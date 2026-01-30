@@ -119,7 +119,7 @@ export default function TruckDetails() {
             <div className={styles.details}>
               <h4 className={styles.detailsTitle}>Vehicle details</h4>
               <div className={styles.detailsLineWrapper}>
-                <hr className={styles.line} />
+                <hr className={styles.detailsLine} />
               </div>
               <ul className={styles.detailsWrapper}>
                 <li className={styles.detItem}>

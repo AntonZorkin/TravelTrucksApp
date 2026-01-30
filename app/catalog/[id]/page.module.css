@@ -101,11 +101,13 @@
   font-weight: 600;
   font-size: 20px;
   line-height: 1.2;
-  margin-bottom: 24px;
   background-color: transparent;
   border: none;
   height: 48px;
   border-bottom: 5px solid #fff;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 0;
 }
 
 .activeTab {
@@ -124,6 +126,9 @@
 .line {
   border: none;
   border-top: 1px solid var(--color-gray-light);
+}
+
+.detailsLine {
   margin-bottom: 24px;
 }
 

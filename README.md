@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TravelTrucks
 
-## Getting Started
+**TravelTrucks** — фронтенд частина веб-додатку для компанії з оренди кемперів. Додаток дозволяє переглядати список кемперів у каталозі, фільтрувати оголошення, відкривати сторінку конкретного кемпера з характеристиками та відгуками, а також залишати заявку на бронювання через форму.
 
-First, run the development server:
+---
 
-```bash
+## Основні можливості
+
+- **Домашня сторінка (Home)**
+  - Головний банер з CTA (перехід до каталогу)
+  - Навігація по сайту
+
+- **Сторінка каталогу (Catalog)**
+  - Список оголошень про кемпери
+  - Фільтрація за:
+    - локацією (місто)
+    - типом авто (van / fully integrated / alcove)
+    - обладнанням (AC, automatic, kitchen, TV, bathroom тощо)
+  - Додавання кемпера в обране (іконка ❤️)
+  - Кнопка “Show more” для переходу на детальну сторінку
+
+- **Сторінка одного кемпера (Camper details)**
+  - Галерея зображень
+  - Вкладки **Features** та **Reviews**
+  - Блок характеристик (довжина, ширина, висота, бак, витрата тощо)
+  - **Форма бронювання**: ім’я, email, дата, коментар
+
+---
+
+## Технології (приклад)
+
+- React
+- Next.js
+- Axios / Fetch API
+- HTML/CSS (або SCSS / CSS Modules — залежить від реалізації)
+
+---
+
+## ⚙️ Встановлення та запуск
+
+1. **Клонувати репозиторій:**
+   ```bash
+   git clone https://github.com/AntonZorkin/TravelTrucksApp
+   ```
+   **Перейти в папку проєкту:**
+
+cd traveltrucks
+
+**Встановити залежності:**
+
+npm install
+
+**Запустити локально:**
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Відкрити у браузері:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+http://localhost:3000 (або порт, який покаже консоль)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Структура сторінок**
 
-## Learn More
+/ — Home
 
-To learn more about Next.js, take a look at the following resources:
+/catalog — Catalog
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+/catalog/:id — Camper details
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Автор**
 
-## Deploy on Vercel
+Зоркін Антон
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+https://github.com/AntonZorkin/TravelTrucksApp
