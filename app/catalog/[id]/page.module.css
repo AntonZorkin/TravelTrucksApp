@@ -124,6 +124,7 @@
 .line {
   border: none;
   border-top: 1px solid var(--color-gray-light);
+  margin-bottom: 24px;
 }
 
 .truckDetails,
