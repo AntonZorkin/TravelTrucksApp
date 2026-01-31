@@ -12,7 +12,6 @@ import FeaturesList from "@/components/FeaturesList/FeaturesList";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { uk } from "date-fns/locale";
-import { handleClientScriptLoad } from "next/script";
 
 export default function TruckDetails() {
   const [truck, setTruck] = useState<Camper | null>(null);
