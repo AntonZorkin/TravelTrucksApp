@@ -22,8 +22,10 @@ export default function TruckDetails() {
   const [date, setDate] = useState<Date | null>();
   const [comment, setComment] = useState("");
 
-  const [activeTab, setActiveTab] = useState<"Features"|"Reviews">("Features")
-  
+  const [activeTab, setActiveTab] = useState<"Features" | "Reviews">(
+    "Features",
+  );
+
   const { id } = useParams<{ id: string }>();
   useEffect(() => {
     if (!id) {
@@ -86,7 +88,7 @@ export default function TruckDetails() {
             </div>
           </div>
           <div className={styles.price}>
-            <p>€{truck?.price}.00</p>
+            {truck?.price !== undefined && <p>€{truck.price.toFixed(2)}</p>}
           </div>
         </div>
 
@@ -103,74 +105,87 @@ export default function TruckDetails() {
       <div className={styles.tabs}>
         <div className={styles.tabsHead}>
           <div className={styles.tabsTitlesWrapper}>
-            <button className={`${styles.tabsTitles} ${activeTab==="Features"?styles.activeTab:""}`} onClick={() => setActiveTab("Features")}>Features</button>
-            <button className={`${styles.tabsTitles} ${activeTab==="Reviews"?styles.activeTab:""}`} onClick={() => setActiveTab("Reviews")}>Reviews</button>
+            <button
+              className={`${styles.tabsTitles} ${activeTab === "Features" ? styles.activeTab : ""}`}
+              onClick={() => setActiveTab("Features")}
+            >
+              Features
+            </button>
+            <button
+              className={`${styles.tabsTitles} ${activeTab === "Reviews" ? styles.activeTab : ""}`}
+              onClick={() => setActiveTab("Reviews")}
+            >
+              Reviews
+            </button>
           </div>
 
           <hr className={styles.line} />
         </div>
         <div className={styles.features}>
-
-          {activeTab==="Features"&&<div className={styles.truckDetails}>
-            <div className={styles.featuresWrapper}>
-              {truck && <FeaturesList truck={truck} limit={11} />}
-            </div>
-            <div className={styles.details}>
-              <h4 className={styles.detailsTitle}>Vehicle details</h4>
-              <div className={styles.detailsLineWrapper}>
-                <hr className={styles.detailsLine} />
+          {activeTab === "Features" && (
+            <div className={styles.truckDetails}>
+              <div className={styles.featuresWrapper}>
+                {truck && <FeaturesList truck={truck} limit={11} />}
               </div>
-              <ul className={styles.detailsWrapper}>
-                <li className={styles.detItem}>
-                  <p>Form</p>
-                  <p>{truck?.form}</p>
-                </li>
-                <li className={styles.detItem}>
-                  <p>Length</p>
-                  <p>{truck?.length}</p>
-                </li>
-                <li className={styles.detItem}>
-                  <p>Width</p>
-                  <p>{truck?.width}</p>
-                </li>
-                <li className={styles.detItem}>
-                  <p>Height</p>
-                  <p>{truck?.height}</p>
-                </li>
-                <li className={styles.detItem}>
-                  <p>Tank</p>
-                  <p>{truck?.tank}</p>
-                </li>
-                <li className={styles.detItem}>
-                  <p>Consumption</p>
-                  <p>{truck?.consumption}</p>
-                </li>
-              </ul>
-            </div>
-          </div>}
-          {activeTab==="Reviews"&&<div className={styles.reviews}>
-          <div>
-            <div className={styles.commentWrapper}>
-              {truck?.reviews.map((comment, index) => (
-                <div className={styles.commentItem} key={index}>
-                  <div className={styles.commentHead}>
-                    <div className={styles.commentTitle}>
-                      {comment.reviewer_name[0]}
-                    </div>
-                    <div className={styles.commentName}>
-                      <div>{comment.reviewer_name}</div>
-                      <div className={styles.stars}>
-                        {renderStars(comment.reviewer_rating)}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className={styles.comment}>{comment.comment}</div>
+              <div className={styles.details}>
+                <h4 className={styles.detailsTitle}>Vehicle details</h4>
+                <div className={styles.detailsLineWrapper}>
+                  <hr className={styles.detailsLine} />
                 </div>
-              ))}
+                <ul className={styles.detailsWrapper}>
+                  <li className={styles.detItem}>
+                    <p>Form</p>
+                    <p>{truck?.form}</p>
+                  </li>
+                  <li className={styles.detItem}>
+                    <p>Length</p>
+                    <p>{truck?.length}</p>
+                  </li>
+                  <li className={styles.detItem}>
+                    <p>Width</p>
+                    <p>{truck?.width}</p>
+                  </li>
+                  <li className={styles.detItem}>
+                    <p>Height</p>
+                    <p>{truck?.height}</p>
+                  </li>
+                  <li className={styles.detItem}>
+                    <p>Tank</p>
+                    <p>{truck?.tank}</p>
+                  </li>
+                  <li className={styles.detItem}>
+                    <p>Consumption</p>
+                    <p>{truck?.consumption}</p>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-        </div>}
+          )}
+          {activeTab === "Reviews" && (
+            <div className={styles.reviews}>
+              <div>
+                <div className={styles.commentWrapper}>
+                  {truck?.reviews.map((comment, index) => (
+                    <div className={styles.commentItem} key={index}>
+                      <div className={styles.commentHead}>
+                        <div className={styles.commentTitle}>
+                          {comment.reviewer_name[0]}
+                        </div>
+                        <div className={styles.commentName}>
+                          <div>{comment.reviewer_name}</div>
+                          <div className={styles.stars}>
+                            {renderStars(comment.reviewer_rating)}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className={styles.comment}>{comment.comment}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
           <div className={styles.formWrapper}>
             <div className={styles.formHead}>
               <h4 className={styles.bookTitle}>Book your campervan now</h4>
@@ -213,7 +228,6 @@ export default function TruckDetails() {
             </form>
           </div>
         </div>
-        
       </div>
     </section>
   );

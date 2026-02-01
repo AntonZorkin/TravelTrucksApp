@@ -47,7 +47,7 @@ const TruckList = ({
                   <div className={styles.head}>
                     <h2 className={styles.title}>{truck.name}</h2>
                     <div className={styles.price}>
-                      <p>€{truck.price}.00</p>
+                      {truck?.price !== undefined && <p>€{truck.price.toFixed(2)}</p>}
 
                       <button
                         type="button"

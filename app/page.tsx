@@ -8,14 +8,16 @@ export default function Home() {
       <main className={styles.container}>
         <section>
           <div className={styles.hero}>
-            <h1 className={styles.title}>Campers of your dreams</h1>
-            <p className={styles.text}>
-              You can find everything you want in our catalog
-            </p>
+            <div className={styles.titleWrapper}>
+              <h1 className={styles.title}>Campers of your dreams</h1>
+              <p className={styles.text}>
+                You can find everything you want in our catalog
+              </p>
+            </div>
+
             <Link href={"/catalog"}>
-              <Button>View Now</Button>    
+              <Button>View Now</Button>
             </Link>
-                    
           </div>
         </section>
       </main>
