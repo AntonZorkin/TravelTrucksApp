@@ -36,6 +36,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.variable}>
         <Header />
+
         <main>{children}</main>
       </body>
     </html>

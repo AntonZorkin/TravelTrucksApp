@@ -12,6 +12,7 @@ import FeaturesList from "@/components/FeaturesList/FeaturesList";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { uk } from "date-fns/locale";
+import { Toaster, toast } from "sonner";
 
 export default function TruckDetails() {
   const [truck, setTruck] = useState<Camper | null>(null);
@@ -37,6 +38,7 @@ export default function TruckDetails() {
         const response = await fetchCampersById(id);
         setTruck(response);
       } catch (error) {
+        toast.error("Failed to load camper details");
       } finally {
         setLoading(false);
       }
@@ -46,7 +48,9 @@ export default function TruckDetails() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Booking successful");
+    toast.success("Booking successful!", {
+      description: "We’ll contact you soon to confirm the details.",
+    });
     setName("");
     setEmail("");
     setDate(null);
@@ -70,165 +74,170 @@ export default function TruckDetails() {
   };
 
   return (
-    <section className={styles.container}>
-      <div className={styles.general}>
-        <div className={styles.head}>
-          <h2 className={styles.title}>{truck?.name}</h2>
-          <div className={styles.ratingLocation}>
-            <div className={styles.rating}>
-              <Icon name="rating" size={16} />
-              <p className={styles.ratingText}>
-                {truck?.rating}({truck?.reviews ? truck.reviews.length : 0}{" "}
-                Reviews)
-              </p>
-            </div>
-            <div className={styles.location}>
-              <Icon name="map" size={16} />
-              <p>{truck?.location}</p>
-            </div>
-          </div>
-          <div className={styles.price}>
-            {truck?.price !== undefined && <p>€{truck.price.toFixed(2)}</p>}
-          </div>
-        </div>
-
-        <div className={styles.imageWrapper}>
-          {truck?.gallery.map((image, index) => (
-            <div className={styles.image} key={index}>
-              <Image src={image.original} alt={truck.name} fill />
-            </div>
-          ))}
-        </div>
-
-        <div className={styles.description}>{truck?.description}</div>
-      </div>
-      <div className={styles.tabs}>
-        <div className={styles.tabsHead}>
-          <div className={styles.tabsTitlesWrapper}>
-            <button
-              className={`${styles.tabsTitles} ${activeTab === "Features" ? styles.activeTab : ""}`}
-              onClick={() => setActiveTab("Features")}
-            >
-              Features
-            </button>
-            <button
-              className={`${styles.tabsTitles} ${activeTab === "Reviews" ? styles.activeTab : ""}`}
-              onClick={() => setActiveTab("Reviews")}
-            >
-              Reviews
-            </button>
-          </div>
-
-          <hr className={styles.line} />
-        </div>
-        <div className={styles.features}>
-          {activeTab === "Features" && (
-            <div className={styles.truckDetails}>
-              <div className={styles.featuresWrapper}>
-                {truck && <FeaturesList truck={truck} limit={11} />}
+    <>
+      <section className={styles.container}>
+        <div className={styles.general}>
+          <div className={styles.head}>
+            <h2 className={styles.title}>{truck?.name}</h2>
+            <div className={styles.ratingLocation}>
+              <div className={styles.rating}>
+                <Icon name="rating" size={16} />
+                <p className={styles.ratingText}>
+                  {truck?.rating}({truck?.reviews ? truck.reviews.length : 0}{" "}
+                  Reviews)
+                </p>
               </div>
-              <div className={styles.details}>
-                <h4 className={styles.detailsTitle}>Vehicle details</h4>
-                <div className={styles.detailsLineWrapper}>
-                  <hr className={styles.detailsLine} />
+              <div className={styles.location}>
+                <Icon name="map" size={16} />
+                <p>{truck?.location}</p>
+              </div>
+            </div>
+            <div className={styles.price}>
+              {truck?.price !== undefined && <p>€{truck.price.toFixed(2)}</p>}
+            </div>
+          </div>
+
+          <div className={styles.imageWrapper}>
+            {truck?.gallery.map((image, index) => (
+              <div className={styles.image} key={index}>
+                <Image src={image.original} alt={truck.name} fill />
+              </div>
+            ))}
+          </div>
+
+          <div className={styles.description}>{truck?.description}</div>
+        </div>
+        <div className={styles.tabs}>
+          <div className={styles.tabsHead}>
+            <div className={styles.tabsTitlesWrapper}>
+              <button
+                type="button"
+                className={`${styles.tabsTitles} ${activeTab === "Features" ? styles.activeTab : ""}`}
+                onClick={() => setActiveTab("Features")}
+              >
+                Features
+              </button>
+              <button
+                type="button"
+                className={`${styles.tabsTitles} ${activeTab === "Reviews" ? styles.activeTab : ""}`}
+                onClick={() => setActiveTab("Reviews")}
+              >
+                Reviews
+              </button>
+            </div>
+
+            <hr className={styles.line} />
+          </div>
+          <div className={styles.features}>
+            {activeTab === "Features" && (
+              <div className={styles.truckDetails}>
+                <div className={styles.featuresWrapper}>
+                  {truck && <FeaturesList truck={truck} limit={11} />}
                 </div>
-                <ul className={styles.detailsWrapper}>
-                  <li className={styles.detItem}>
-                    <p>Form</p>
-                    <p>{truck?.form}</p>
-                  </li>
-                  <li className={styles.detItem}>
-                    <p>Length</p>
-                    <p>{truck?.length}</p>
-                  </li>
-                  <li className={styles.detItem}>
-                    <p>Width</p>
-                    <p>{truck?.width}</p>
-                  </li>
-                  <li className={styles.detItem}>
-                    <p>Height</p>
-                    <p>{truck?.height}</p>
-                  </li>
-                  <li className={styles.detItem}>
-                    <p>Tank</p>
-                    <p>{truck?.tank}</p>
-                  </li>
-                  <li className={styles.detItem}>
-                    <p>Consumption</p>
-                    <p>{truck?.consumption}</p>
-                  </li>
-                </ul>
+                <div className={styles.details}>
+                  <h4 className={styles.detailsTitle}>Vehicle details</h4>
+                  <div className={styles.detailsLineWrapper}>
+                    <hr className={styles.detailsLine} />
+                  </div>
+                  <ul className={styles.detailsWrapper}>
+                    <li className={styles.detItem}>
+                      <p>Form</p>
+                      <p>{truck?.form}</p>
+                    </li>
+                    <li className={styles.detItem}>
+                      <p>Length</p>
+                      <p>{truck?.length}</p>
+                    </li>
+                    <li className={styles.detItem}>
+                      <p>Width</p>
+                      <p>{truck?.width}</p>
+                    </li>
+                    <li className={styles.detItem}>
+                      <p>Height</p>
+                      <p>{truck?.height}</p>
+                    </li>
+                    <li className={styles.detItem}>
+                      <p>Tank</p>
+                      <p>{truck?.tank}</p>
+                    </li>
+                    <li className={styles.detItem}>
+                      <p>Consumption</p>
+                      <p>{truck?.consumption}</p>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
-          )}
-          {activeTab === "Reviews" && (
-            <div className={styles.reviews}>
-              <div>
-                <div className={styles.commentWrapper}>
-                  {truck?.reviews.map((comment, index) => (
-                    <div className={styles.commentItem} key={index}>
-                      <div className={styles.commentHead}>
-                        <div className={styles.commentTitle}>
-                          {comment.reviewer_name[0]}
-                        </div>
-                        <div className={styles.commentName}>
-                          <div>{comment.reviewer_name}</div>
-                          <div className={styles.stars}>
-                            {renderStars(comment.reviewer_rating)}
+            )}
+            {activeTab === "Reviews" && (
+              <div className={styles.reviews}>
+                <div>
+                  <div className={styles.commentWrapper}>
+                    {truck?.reviews.map((comment, index) => (
+                      <div className={styles.commentItem} key={index}>
+                        <div className={styles.commentHead}>
+                          <div className={styles.commentTitle}>
+                            {comment.reviewer_name[0]}
+                          </div>
+                          <div className={styles.commentName}>
+                            <div>{comment.reviewer_name}</div>
+                            <div className={styles.stars}>
+                              {renderStars(comment.reviewer_rating)}
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div className={styles.comment}>{comment.comment}</div>
-                    </div>
-                  ))}
+                        <div className={styles.comment}>{comment.comment}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
+            )}
+            <div className={styles.formWrapper}>
+              <div className={styles.formHead}>
+                <h4 className={styles.bookTitle}>Book your campervan now</h4>
+                <p className={styles.bookText}>
+                  Stay connected! We are always ready to help you.
+                </p>
+              </div>
+              <form onSubmit={handleSubmit} className={styles.form}>
+                <input
+                  className={styles.inputField}
+                  type="text"
+                  placeholder="Name*"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <input
+                  className={styles.inputField}
+                  type="email"
+                  placeholder="Email*"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <DatePicker
+                  selected={date}
+                  onChange={(d: Date | null) => setDate(d)}
+                  locale={uk}
+                  dateFormat="dd.MM.yyyy"
+                  placeholderText="Booking date*"
+                  className={styles.inputField}
+                />
+                <textarea
+                  className={`${styles.inputField} ${styles.textarea}`}
+                  placeholder="Comment"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                />
+                <Button type="submit" disabled={loading}>
+                  {loading ? "Loading..." : "Send"}
+                </Button>
+              </form>
             </div>
-          )}
-          <div className={styles.formWrapper}>
-            <div className={styles.formHead}>
-              <h4 className={styles.bookTitle}>Book your campervan now</h4>
-              <p className={styles.bookText}>
-                Stay connected! We are always ready to help you.
-              </p>
-            </div>
-            <form onSubmit={handleSubmit} className={styles.form}>
-              <input
-                className={styles.inputField}
-                type="text"
-                placeholder="Name*"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <input
-                className={styles.inputField}
-                type="email"
-                placeholder="Email*"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <DatePicker
-                selected={date}
-                onChange={(d: Date | null) => setDate(d)}
-                locale={uk}
-                dateFormat="dd.MM.yyyy"
-                placeholderText="Booking date*"
-                className={styles.inputField}
-              />
-              <textarea
-                className={`${styles.inputField} ${styles.textarea}`}
-                placeholder="Comment"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              />
-              <Button type="submit" disabled={loading}>
-                {loading ? "Loading..." : "Send"}
-              </Button>
-            </form>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <Toaster position="top-center" richColors closeButton />
+    </>
   );
 }
